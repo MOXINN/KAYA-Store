@@ -58,7 +58,7 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 //
-// 🔒 Hash Password Before Saving
+//  Hash Password Before Saving
 //
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
@@ -68,14 +68,14 @@ userSchema.pre("save", async function (next) {
 });
 
 //
-// 🔐 Compare Password Method
+//  Compare Password Method
 //
 userSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
 //
-// ✅ Export Model
+//  Export Model
 //
 const User = mongoose.model("User", userSchema);
 module.exports = User;

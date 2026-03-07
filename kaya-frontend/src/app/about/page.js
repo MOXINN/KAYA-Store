@@ -83,7 +83,7 @@ export default function AboutUs() {
               <div className="w-24 h-24 mx-auto bg-gray-800 rounded-full mb-6 border-2 border-emerald-500 overflow-hidden">
                 <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop')] bg-cover bg-center"></div>
               </div>
-              <h3 className="text-xl font-medium text-white mb-1">Founder name</h3>
+              <h3 className="text-xl font-medium text-white mb-1">Mohd Mohsin Ansari</h3>
               <p className="text-emerald-400 text-xs tracking-widest uppercase mb-4">Founder & Master Weaver</p>
               <p className="text-gray-400 text-sm font-light">With decades of experience in the textile industry, he oversees the manufacturing unit in Kalpi, ensuring every thread meets our rigorous standards.</p>
             </div>

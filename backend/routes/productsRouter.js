@@ -1,15 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const { getAllProducts, getSingleProduct, createProduct } = require('../controllers/productsController');
-// Import the middleware from ownersController or a shared file
+
+// Import your controller functions
+const { getAllProducts, getSingleProduct, createProduct, deleteProduct } = require('../controllers/productsController');
+
+// Import your security middleware
 const { authMiddleware: ownerAuth } = require('../controllers/ownersController'); 
 
 // Public Routes (Anyone can see products)
 router.get("/", getAllProducts);
 router.get("/:id", getSingleProduct);
 
-// Protected Route (Only logged-in Owners can create)
-// Note: You need to make sure you send the Owner Token from frontend when creating
+// Protected Routes (Only logged-in Owners can create or delete)
 router.post("/create", ownerAuth, createProduct);
+router.delete("/:id", ownerAuth, deleteProduct); // <-- Clean and consistent!
 
 module.exports = router;

@@ -152,3 +152,23 @@ exports.createProduct = async (req, res) => {
     });
   }
 };
+
+// DELETE a product (Properly separated!)
+exports.deleteProduct = async (req, res) => {
+    try {
+        const productId = req.params.id;
+
+        // Uses 'Product' to match your Mongoose model import
+        const deletedProduct = await Product.findByIdAndDelete(productId);
+
+        if (!deletedProduct) {
+            return res.status(404).json({ message: "Product not found in database." });
+        }
+
+        res.status(200).json({ message: "Fabric roll successfully deleted from Kaya." });
+
+    } catch (error) {
+        console.error("Error deleting product:", error);
+        res.status(500).json({ message: "Server error while deleting product." });
+    }
+};

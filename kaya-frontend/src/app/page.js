@@ -18,18 +18,35 @@ export default function Home() {
   const [activeParent, setActiveParent] = useState("All");
   const [activeSub, setActiveSub] = useState("All");
 
-  useEffect(() => {
+
+  
+useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("http://localhost:5000/products");
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/products`, // Removed the /api
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "any-value", // This tells ngrok to give us the JSON, not the warning page!
+            },
+          }
+        );
+
         const data = await res.json();
-        if (res.ok) setProducts(data.products || []);
+
+        if (res.ok) {
+          setProducts(data.products || data);
+        } else {
+          console.error("Server Error:", data);
+        }
+
       } catch (error) {
         console.error("Failed to fetch products", error);
       } finally {
         setLoading(false);
       }
     };
+
     fetchProducts();
   }, []);
 

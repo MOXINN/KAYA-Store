@@ -18,7 +18,11 @@ const seedProducts = [
     price: 1200,
     discountPrice: 999,
     stock: 50,
-    images: [{ url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKVhvdlj_qK2Vw2Yjz9Dx5J_aj803EzngGKQ&s" }],
+    images: [
+  { url: "https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?q=80&w=1000&auto=format&fit=crop" }, // Front
+  { url: "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?q=80&w=1000&auto=format&fit=crop" }, // Side
+  { url: "https://images.unsplash.com/photo-1593030761756-1d1dd681123f?q=80&w=1000&auto=format&fit=crop" }  // Fabric Close
+],
     materialOrigin: "Kalpi",
     handwoven: true,
     isFeatured: true,
@@ -35,7 +39,11 @@ const seedProducts = [
     size: "M",
     price: 1800,
     stock: 30,
-    images: [{ url: "https://images.unsplash.com/photo-1593030761756-1d1dd681123f?q=80&w=1000&auto=format&fit=crop" }],
+    images: [
+  { url: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=1000&auto=format&fit=crop" }, // Front
+  { url: "https://images.unsplash.com/photo-1583391733958-65e2be105b4a?q=80&w=1000&auto=format&fit=crop" }, // Side
+  { url: "https://images.unsplash.com/photo-1602810319428-019690571b5b?q=80&w=1000&auto=format&fit=crop" }  // Detail 
+  ],
     materialOrigin: "Varanasi",
     handwoven: true,
     isFeatured: false,
@@ -55,7 +63,11 @@ const seedProducts = [
     price: 3500,
     discountPrice: 2999,
     stock: 15,
-    images: [{ url: "https://images.unsplash.com/photo-1610030469983-98e550d615ef?q=80&w=1000&auto=format&fit=crop" }],
+   images: [
+  { url: "https://images.unsplash.com/photo-1610189020382-668d9d3b7c4f?q=80&w=1000&auto=format&fit=crop" }, // Front
+  { url: "https://images.unsplash.com/photo-1610030469983-98e550d615ef?q=80&w=1000&auto=format&fit=crop" }, // Side
+  { url: "https://images.unsplash.com/photo-1583391733958-65e2be105b4a?q=80&w=1000&auto=format&fit=crop" }  // Border Detail
+],
     materialOrigin: "Kalpi",
     handwoven: true,
     isFeatured: true,
@@ -72,7 +84,11 @@ const seedProducts = [
     size: "S",
     price: 850,
     stock: 100,
-    images: [{ url: "https://images.unsplash.com/photo-1583391733958-65e2be105b4a?q=80&w=1000&auto=format&fit=crop" }],
+    images: [
+  { url: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=1000&auto=format&fit=crop" }, // Front
+  { url: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?q=80&w=1000&auto=format&fit=crop" }, // Side
+  { url: "https://images.unsplash.com/photo-1520975954732-35dd22299614?q=80&w=1000&auto=format&fit=crop" }  // Detail
+],
     materialOrigin: "Kalpi",
     handwoven: true,
     isFeatured: false,
@@ -92,7 +108,9 @@ const seedProducts = [
     size: "2 Meters",
     price: 450,
     stock: 60,
-    images: [{ url: "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?q=80&w=1000&auto=format&fit=crop" }],
+    images: [
+  { url: "https://images.unsplash.com/photo-1602810319428-019690571b5b?q=80&w=1000&auto=format&fit=crop" }
+],
     materialOrigin: "Kalpi",
     handwoven: true,
     isFeatured: false,
@@ -111,7 +129,9 @@ const seedProducts = [
     size: "By Meter",
     price: 300,
     stock: 1000,
-    images: [{ url: "https://images.unsplash.com/photo-1598114660301-83161c8d203e?q=80&w=1000&auto=format&fit=crop" }],
+    images: [
+  { url: "https://images.unsplash.com/photo-1593030761756-1d1dd681123f?q=80&w=1000&auto=format&fit=crop" }
+],
     materialOrigin: "Kalpi",
     handwoven: true,
     isFeatured: false,
@@ -128,7 +148,9 @@ const seedProducts = [
     size: "By Meter",
     price: 650,
     stock: 200,
-    images: [{ url: "https://images.unsplash.com/photo-1605289982774-9a6fef564df8?q=80&w=1000&auto=format&fit=crop" }],
+    images: [
+  { url: "https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=1000&auto=format&fit=crop" }
+],
     materialOrigin: "Chanderi",
     handwoven: true,
     isFeatured: true,
@@ -147,7 +169,11 @@ const seedProducts = [
     size: "Free Size",
     price: 350,
     stock: 45,
-    images: [{ url: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=1000&auto=format&fit=crop" }],
+    images: [
+  { url: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?q=80&w=1000&auto=format&fit=crop" }, // Front
+  { url: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=1000&auto=format&fit=crop" }, // Side
+  { url: "https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=1000&auto=format&fit=crop" }  // Detail
+],
     materialOrigin: "Kalpi",
     handwoven: false,
     isFeatured: false,
@@ -165,7 +191,9 @@ const seedProducts = [
     price: 4500,
     discountPrice: 3999,
     stock: 20,
-    images: [{ url: "https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?q=80&w=1000&auto=format&fit=crop" }],
+   images: [
+  { url: "https://images.unsplash.com/photo-1602810316498-ab67cf68c8e1?q=80&w=1000&auto=format&fit=crop" }
+],
     materialOrigin: "Varanasi",
     handwoven: true,
     isFeatured: true,

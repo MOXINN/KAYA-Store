@@ -1,4 +1,5 @@
 "use client";
+import { toast } from "react-hot-toast";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -39,12 +40,11 @@ export default function Login() {
         // 1. Save Token
         localStorage.setItem("token", data.token);
 
-        // 2. Show Alert (Code pauses here until you click OK)
-        alert("User login successfully!");
+       localStorage.setItem("token", data.token);
+  toast.success("Welcome back!");
+  router.push("/profile");
 
-        // 3. 🚀 FIXED: Hard Redirect to Home
-        // This moves you to "/" AND refreshes the page so the Navbar updates.
-        window.location.href = "/"; 
+        
         
       } else {
         setError(data.message || "Invalid email or password");

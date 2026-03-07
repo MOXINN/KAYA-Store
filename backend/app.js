@@ -3,10 +3,12 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const connectDB = require("./config/mongoose-connection");
 
-// Load env variables
+//  MOVED THIS UP! Load env variables FIRST before requiring anything else
 dotenv.config({ path: path.join(__dirname, ".env") });
+
+// NOW it is safe to load the database connection because process.env is populated
+const connectDB = require("./config/mongoose-connection");
 
 const app = express();
 
@@ -14,7 +16,10 @@ const app = express();
 connectDB();
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+    origin: '*', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -23,6 +28,7 @@ app.use(cookieParser());
 app.use("/users", require("./routes/usersRouter"));
 app.use("/owners", require("./routes/ownersRouter"));
 app.use("/products", require("./routes/productsRouter"));
+app.use("/orders", require("./routes/ordersRouter"));
 
 // Health Route
 app.get("/", (req, res) => {
