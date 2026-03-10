@@ -22,13 +22,16 @@ export default function Register() {
     setLoading(true);
     setError("");
 
+    // Use the live URL if available, otherwise use localhost for local testing
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
     try {
-      const res = await fetch("http://localhost:5000/users/register", {
+      const res = await fetch(`${API_URL}/users/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
+      
       const data = await res.json();
 
       if (res.ok) {
