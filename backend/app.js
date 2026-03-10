@@ -17,8 +17,9 @@ connectDB();
 
 // Middlewares
 app.use(cors({
-    origin: '*', 
+    origin: ["https://kaya-store-six.vercel.app", "http://localhost:3000"],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    credentials: true // Crucial if you use cookies for auth later
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

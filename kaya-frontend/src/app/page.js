@@ -1,14 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const CATEGORY_STRUCTURE = {
-  "Men's": ["Khadi Kurta", "Woven Cotton Kurta", "Nehru Jacket (Khadi)", "Khadi Shirts", "Handloom Jackets", "Pathani Suit", "Kurta Pajama Sets", "Casual Ethnic Wear"],
-  "Women's": ["Khadi Sarees", "Handwoven Sarees", "Khadi Kurtis", "Suit Sets (Handloom)", "Dupattas (Khadi / Cotton)", "Ethnic Gowns", "Co-ord Sets", "Festive Wear"],
-  "Unisex & Sustainable": ["Unisex Kurtas", "Khadi Shawls", "Stoles", "Scarves", "Sustainable Basics", "Organic Cotton Wear", "Gamcha"],
-  "Fabrics": ["Pure Khadi", "Handloom Cotton", "Linen Blend", "Ikat", "Muslin", "Jamdani", "Chanderi", "Organic Cotton"],
+  "Men's": ["Khadi Kurta", "Woven Cotton Kurta", "Nehru Jacket", "Khadi Shirts", "Handloom Jackets", "Pathani Suit", "Kurta Pajama Set", "Casual Ethnic Wear", "Wedding Collection"],
+  "Women's": ["Khadi Sarees", "Handwoven Sarees", "Khadi Kurti", "Suit Sets (Handloom)", "Dupattas (Khadi / Cotton)", "Ethnic Gowns", "Co-ord Sets", "Festive Wear", "Anarkali Kurti", "Dupatta", "Lehenga Choli"],
+  "Unisex & Sustainable": ["Unisex Kurtas", "Khadi Shawls", "Stoles", "Scarves", "Sustainable Basics", "Organic Cotton Wear", "Gamcha", "Stoles & Dupattas"],
+  "Fabrics": ["Raw Khadi Fabric", "Handloom Cotton", "Linen Blend", "Ikat", "Muslin", "Jamdani", "Chanderi Fabric", "Organic Cotton"],
   "Occasions": ["Daily Wear", "Office Wear", "Festive Collection", "Wedding Collection", "Summer Collection", "Winter Khadi Wear"],
-  "Accessories": ["Khadi Bags", "Potli Bags", "Footwear", "Handmade Belts", "Fabric Jewelry"]
+  "Accessories": ["Khadi Bags", "Potli Bags", "Footwear", "Handmade Belts", "Fabric Jewelry", "Bags"],
+  "Kids": ["Kids Ethnic Wear"]
 };
 
 export default function Home() {
@@ -18,16 +20,14 @@ export default function Home() {
   const [activeParent, setActiveParent] = useState("All");
   const [activeSub, setActiveSub] = useState("All");
 
-
-  
 useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/products`, // Removed the /api
+          `${process.env.NEXT_PUBLIC_API_URL}/products`,
           {
             headers: {
-              "ngrok-skip-browser-warning": "any-value", // This tells ngrok to give us the JSON, not the warning page!
+              "ngrok-skip-browser-warning": "any-value", 
             },
           }
         );
@@ -69,27 +69,96 @@ useEffect(() => {
     setActiveSub("All"); // Reset sub-category when parent changes
   };
 
-  if (loading) return <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center tracking-widest text-sm uppercase">Loading Collection...</div>;
+ //  HANDLOOM LOADER 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center overflow-hidden">
+        <div className="text-center">
+          {/* Handloom Animation */}
+          <div className="relative mx-auto w-64 h-64 flex items-center justify-center">
+            {/* Loom Frame */}
+            <div className="absolute w-64 h-64 border-8 border-white/20 rounded-2xl"></div>
+            
+            {/* Vertical Threads */}
+            <div className="absolute inset-0 flex justify-between px-8">
+              {[...Array(9)].map((_, i) => (
+                <div 
+                  key={i}
+                  className="w-[2px] h-full bg-gradient-to-b from-transparent via-emerald-400/60 to-transparent animate-weave"
+                  style={{ animationDelay: `${i * 80}ms` }}
+                ></div>
+              ))}
+            </div>
+
+            {/* Moving Shuttle (Weft) */}
+            <div className="absolute w-8 h-3 bg-emerald-400 rounded-full shadow-[0_0_25px_#10b981] animate-shuttle"></div>
+
+            {/* Loom Top & Bottom Bars */}
+            <div className="absolute top-4 left-4 right-4 h-2 bg-white/10 rounded"></div>
+            <div className="absolute bottom-4 left-4 right-4 h-2 bg-white/10 rounded"></div>
+          </div>
+
+          <p className="mt-10 text-emerald-400 text-sm tracking-[0.4em] font-medium uppercase animate-pulse">
+            Weaving the collection...
+          </p>
+          <p className="text-gray-500 text-xs mt-2">From the looms of Kalpi</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white selection:bg-emerald-500/30">
       
       {/* 1. HERO SECTION */}
-      <div className="relative h-[80vh] flex items-center justify-center overflow-hidden bg-[url('https://images.unsplash.com/photo-1605001007823-774f35832049?q=80&w=2070&auto=format&fit=crop')] bg-fixed bg-cover bg-center">
-        <div className="absolute inset-0 bg-black/70 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent"></div>
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto mt-20">
-          <p className="text-emerald-400 text-sm tracking-[0.4em] uppercase font-medium mb-6 animate-fade-in-up">Authentic Handlooms</p>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tighter mb-8 text-white">
-            Woven in <span className="italic text-gray-400">Tradition.</span>
-          </h1>
-          <p className="text-gray-300 text-base md:text-lg font-light leading-relaxed mb-10 max-w-2xl mx-auto">
-            Discover our curated selection of premium Khadi and Summer Cool fabrics. Crafted with precision directly from our factory in Kalpi.
-          </p>
-          <button onClick={() => document.getElementById('shop').scrollIntoView({ behavior: 'smooth' })} className="inline-block px-10 py-4 bg-white text-black text-sm font-bold tracking-widest uppercase hover:bg-emerald-500 hover:text-white transition-all duration-500 rounded-full">
-            Explore Collection
-          </button>
-        </div>
-      </div>
+<section className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-[url('https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf')] bg-cover bg-center bg-fixed">
+
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80 backdrop-blur-[2px]"></div>
+
+  {/* Hero Content */}
+  <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+
+    {/* Tagline */}
+    <p className="text-emerald-400 text-xs md:text-sm tracking-[0.5em] uppercase font-semibold mb-6 animate-fade-in-up">
+      Authentic Handlooms
+    </p>
+
+    {/* Heading */}
+    <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-white leading-tight mb-8 animate-fade-in-up">
+      Woven in{" "}
+      <span className="italic bg-gradient-to-r from-emerald-400 via-green-300 to-emerald-500 bg-clip-text text-transparent">
+        Tradition
+      </span>
+    </h1>
+
+    {/* Description */}
+    <p className="text-gray-300 text-base md:text-lg font-light leading-relaxed mb-10 max-w-2xl mx-auto animate-fade-in-up">
+      Discover our curated selection of premium Khadi and Summer Cool fabrics.
+      Crafted with precision directly from our factory in Kalpi.
+    </p>
+
+    {/* Button */}
+    <button
+      onClick={() =>
+        document
+          .getElementById("shop")
+          ?.scrollIntoView({ behavior: "smooth" })
+      }
+      className="group relative inline-flex items-center gap-2 px-10 py-4 text-sm font-semibold tracking-widest uppercase text-white border border-white/40 rounded-full backdrop-blur-md bg-white/10 hover:bg-emerald-500 hover:border-emerald-500 transition-all duration-500"
+    >
+      Explore Collection
+      <span className="group-hover:translate-x-1 transition-transform duration-300">
+        →
+      </span>
+    </button>
+
+  </div>
+  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce via-green-300 text-lg">
+  ↓
+</div>
+
+</section>
 
       {/* 2. FEATURES LIST SECTION */}
       <div className="border-y border-white/5 bg-[#0f0f0f]">
