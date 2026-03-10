@@ -81,7 +81,7 @@ export default function AboutUs() {
             {/* Founder Profile */}
             <div className="bg-[#0a0a0a]/80 backdrop-blur-md border border-white/10 p-8 rounded-2xl text-center hover:border-emerald-500/50 transition-colors">
               <div className="w-24 h-24 mx-auto bg-gray-800 rounded-full mb-6 border-2 border-emerald-500 overflow-hidden">
-                <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop')] bg-cover bg-center"></div>
+                <div className="w-full h-full bg-[url('https://instagram.fknu1-1.fna.fbcdn.net/v/t51.82787-19/622577565_17960943288031777_6769950479970493037_n.jpg?stp=dst-jpg_s320x320_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.fknu1-1.fna.fbcdn.net&_nc_cat=101&_nc_oc=Q6cZ2QGKdXwcc5PCZcEkvkcEvIGxRliF24bUNl5eZz0IFVTKi0Ttgtb_OO8koOljh4WiCEa9wtV_kxyl32SQvwZvbiDZ&_nc_ohc=4LafwHMIDs4Q7kNvwEWTo94&_nc_gid=7WnRBqoywOnvFgTtRzod5g&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfwZUfllSDxDpAQWFjPrGAwU9oOMwnVEfqpRY48VUkDkGQ&oe=69B5DC21&_nc_sid=8b3546')] bg-cover bg-center"></div>
               </div>
               <h3 className="text-xl font-medium text-white mb-1">Mohd Mohsin Ansari</h3>
               <p className="text-emerald-400 text-xs tracking-widest uppercase mb-4">Founder & Master Weaver</p>
@@ -91,7 +91,7 @@ export default function AboutUs() {
             {/* Tech Profile */}
             <div className="bg-[#0a0a0a]/80 backdrop-blur-md border border-white/10 p-8 rounded-2xl text-center hover:border-emerald-500/50 transition-colors">
               <div className="w-24 h-24 mx-auto bg-gray-800 rounded-full mb-6 border-2 border-emerald-500 overflow-hidden">
-                <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop')] bg-cover bg-center"></div>
+                <div className="w-full h-full bg-[url('https://www.bing.com/th/id/OIP.rcmXeqCUOiCg54dfU4v9tgHaHa?w=181&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2')] bg-cover bg-center"></div>
               </div>
               <h3 className="text-xl font-medium text-white mb-1">Director name</h3>
               <p className="text-emerald-400 text-xs tracking-widest uppercase mb-4">Director</p>
