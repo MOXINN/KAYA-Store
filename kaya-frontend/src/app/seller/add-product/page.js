@@ -51,11 +51,17 @@ export default function AddProduct() {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(true);
   const [imagePreview, setImagePreview] = useState("");
 
-  useEffect(() => {
-    const token = localStorage.getItem("sellerToken");
-    if (!token) router.replace("/seller/login");
+ useEffect(() => {
+    const token = localStorage.getItem("ownerToken"); 
+    
+    if (!token) {
+      router.replace("/seller/login");
+    } else {
+      setCheckingAuth(false); // Token found, stop loading and show the page
+    }
   }, [router]);
 
   const initialState = {
@@ -110,7 +116,7 @@ export default function AddProduct() {
     setLoading(true);
 
     try {
-      const token = localStorage.getItem("sellerToken");
+      const token = localStorage.getItem("ownerToken");
 
       const payload = {
         ...formData,
@@ -143,7 +149,7 @@ export default function AddProduct() {
         return;
       }
 
-      toast.success("Product published successfully 🚀");
+      toast.success("Product published successfully");
 
       setFormData(initialState);
       setImagePreview("");
@@ -160,6 +166,14 @@ export default function AddProduct() {
       setLoading(false);
     }
   };
+
+  if (checkingAuth) {
+    return (
+      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#050505] text-white p-8 lg:p-12">
