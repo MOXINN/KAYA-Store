@@ -8,44 +8,21 @@ import {
   CheckCircle,
   Image as ImageIcon,
   IndianRupee,
-  Hash,
   Layers,
-  Tag
+  Tag,
+  ChevronDown
 } from "lucide-react";
 
-const CATEGORIES = [
-  "Khadi Kurta",
-  "Woven Cotton Kurta",
-  "Nehru Jacket (Khadi)",
-  "Khadi Shirts",
-  "Handloom Jackets",
-  "Pathani Suit",
-  "Kurta Pajama Sets",
-  "Casual Ethnic Wear",
-  "Khadi Sarees",
-  "Handwoven Sarees",
-  "Khadi Kurtis",
-  "Suit Sets (Handloom)",
-  "Dupattas (Khadi / Cotton)",
-  "Ethnic Gowns",
-  "Co-ord Sets",
-  "Festive Wear",
-  "Unisex Kurtas",
-  "Khadi Shawls",
-  "Stoles",
-  "Scarves",
-  "Sustainable Basics",
-  "Organic Cotton Wear",
-  "Gamcha",
-  "Pure Khadi",
-  "Handloom Cotton",
-  "Linen Blend",
-  "Ikat",
-  "Muslin",
-  "Jamdani",
-  "Chanderi",
-  "Organic Cotton"
-];
+// NEW GROUPED CATEGORIES
+const CATEGORIES = {
+  "Men's": ["Khadi Kurta", "Woven Cotton Kurta", "Nehru Jacket", "Khadi Shirts", "Handloom Jackets", "Pathani Suit", "Kurta Pajama Set", "Casual Ethnic Wear", "Wedding Collection"],
+  "Women's": ["Khadi Sarees", "Handwoven Sarees", "Khadi Kurti", "Suit Sets (Handloom)", "Dupattas (Khadi / Cotton)", "Ethnic Gowns", "Co-ord Sets", "Festive Wear", "Anarkali Kurti", "Dupatta", "Lehenga Choli"],
+  "Unisex & Sustainable": ["Unisex Kurtas", "Khadi Shawls", "Stoles", "Scarves", "Sustainable Basics", "Organic Cotton Wear", "Gamcha", "Stoles & Dupattas"],
+  "Fabrics": ["Raw Khadi Fabric", "Handloom Cotton", "Linen Blend", "Ikat", "Muslin", "Jamdani", "Chanderi Fabric", "Organic Cotton"],
+  "Occasions": ["Daily Wear", "Office Wear", "Festive Collection", "Wedding Collection", "Summer Collection", "Winter Khadi Wear"],
+  "Accessories": ["Khadi Bags", "Potli Bags", "Footwear", "Handmade Belts", "Fabric Jewelry", "Bags"],
+  "Kids": ["Kids Ethnic Wear"]
+};
 
 export default function AddProduct() {
   const router = useRouter();
@@ -54,13 +31,13 @@ export default function AddProduct() {
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [imagePreview, setImagePreview] = useState("");
 
- useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem("ownerToken"); 
     
     if (!token) {
       router.replace("/seller/login");
     } else {
-      setCheckingAuth(false); // Token found, stop loading and show the page
+      setCheckingAuth(false);
     }
   }, [router]);
 
@@ -87,7 +64,6 @@ export default function AddProduct() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-
     const newValue = type === "checkbox" ? checked : value;
 
     setFormData({
@@ -121,13 +97,9 @@ export default function AddProduct() {
       const payload = {
         ...formData,
         price: Number(formData.price),
-        discountPrice: formData.discountPrice
-          ? Number(formData.discountPrice)
-          : undefined,
+        discountPrice: formData.discountPrice ? Number(formData.discountPrice) : undefined,
         stock: Number(formData.stock),
-        tags: formData.tags
-          ? formData.tags.split(",").map((t) => t.trim())
-          : []
+        tags: formData.tags ? formData.tags.split(",").map((t) => t.trim()) : []
       };
 
       const res = await fetch(
@@ -154,10 +126,7 @@ export default function AddProduct() {
       setFormData(initialState);
       setImagePreview("");
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
 
     } catch (error) {
       console.error(error);
@@ -188,33 +157,30 @@ export default function AddProduct() {
           </div>
 
           <Link
-            href="/seller/products"
+            href="/seller"
             className="text-emerald-400 hover:text-emerald-300 text-sm"
           >
-            ← Back to Inventory
+            ← Back to Dashboard
           </Link>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-10">
 
           {/* BASIC INFO */}
-
-          <div className="bg-[#111] p-8 rounded-3xl border border-white/5">
-
+          <div className="bg-[#111] p-8 rounded-3xl border border-white/5 shadow-xl">
             <h2 className="text-lg text-emerald-400 flex items-center gap-2 mb-6">
               <Layers size={18} />
               Basic Information
             </h2>
 
             <div className="space-y-6">
-
               <input
                 required
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Product Name"
-                className="w-full bg-black border border-gray-800 rounded-xl p-3"
+                className="w-full bg-[#0a0a0a] border border-gray-800 focus:border-emerald-500 rounded-xl p-4 outline-none transition-colors"
               />
 
               <textarea
@@ -224,39 +190,64 @@ export default function AddProduct() {
                 onChange={handleChange}
                 rows={4}
                 placeholder="Product Description"
-                className="w-full bg-black border border-gray-800 rounded-xl p-3"
+                className="w-full bg-[#0a0a0a] border border-gray-800 focus:border-emerald-500 rounded-xl p-4 outline-none transition-colors"
               />
 
-              <input
-                required
-                list="category-options"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                placeholder="Category"
-                className="w-full bg-black border border-gray-800 rounded-xl p-3"
-              />
+              {/* NEW GROUPED DROPDOWN */}
+              <div className="relative">
+                <select
+                  required
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  className="w-full bg-[#0a0a0a] border border-gray-800 focus:border-emerald-500 rounded-xl p-4 appearance-none outline-none transition-colors text-white cursor-pointer"
+                >
+                  <option value="" disabled>Select Category</option>
+                  {Object.entries(CATEGORIES).map(([group, items]) => (
+                    <optgroup key={group} label={group} className="bg-gray-900 text-emerald-500 font-bold uppercase tracking-wider text-xs">
+                      {items.map(item => (
+                        <option key={item} value={item} className="text-white font-normal text-sm capitalize">
+                          {item}
+                        </option>
+                      ))}
+                    </optgroup>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" size={20} />
+              </div>
 
-              <datalist id="category-options">
-                {CATEGORIES.map((cat) => (
-                  <option key={cat} value={cat} />
-                ))}
-              </datalist>
+              {/* RE-ADDED MISSING FIELDS */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <input
+                  required
+                  name="fabricType"
+                  value={formData.fabricType}
+                  onChange={handleChange}
+                  placeholder="Fabric Type (e.g., Pure Khadi, Muslin)"
+                  className="w-full bg-[#0a0a0a] border border-gray-800 focus:border-emerald-500 rounded-xl p-4 outline-none transition-colors"
+                />
+
+                <input
+                  required
+                  name="color"
+                  value={formData.color}
+                  onChange={handleChange}
+                  placeholder="Color (e.g., Indigo, Off-White)"
+                  className="w-full bg-[#0a0a0a] border border-gray-800 focus:border-emerald-500 rounded-xl p-4 outline-none transition-colors"
+                />
+              </div>
 
             </div>
           </div>
 
           {/* IMAGE */}
-
-          <div className="bg-[#111] p-8 rounded-3xl border border-white/5">
-
+          <div className="bg-[#111] p-8 rounded-3xl border border-white/5 shadow-xl">
             <h2 className="text-lg text-emerald-400 flex items-center gap-2 mb-6">
               <ImageIcon size={18} />
               Product Image
             </h2>
 
-            <div className="w-full h-52 border-2 border-dashed border-gray-800 rounded-xl flex items-center justify-center mb-6 overflow-hidden">
-
+            <div className="w-full h-52 bg-[#0a0a0a] border-2 border-dashed border-gray-800 rounded-xl flex items-center justify-center mb-6 overflow-hidden">
               {imagePreview ? (
                 <img
                   src={imagePreview}
@@ -267,7 +258,6 @@ export default function AddProduct() {
               ) : (
                 <ImageIcon size={40} className="text-gray-700" />
               )}
-
             </div>
 
             <input
@@ -276,30 +266,27 @@ export default function AddProduct() {
               name="imageUrl"
               value={formData.imageUrl}
               onChange={handleChange}
-              placeholder="Image URL"
-              className="w-full bg-black border border-gray-800 rounded-xl p-3"
+              placeholder="Paste Image URL"
+              className="w-full bg-[#0a0a0a] border border-gray-800 focus:border-emerald-500 rounded-xl p-4 outline-none transition-colors"
             />
           </div>
 
           {/* PRICING */}
-
-          <div className="bg-[#111] p-8 rounded-3xl border border-white/5">
-
+          <div className="bg-[#111] p-8 rounded-3xl border border-white/5 shadow-xl">
             <h2 className="text-lg text-emerald-400 flex items-center gap-2 mb-6">
               <IndianRupee size={18} />
               Pricing & Stock
             </h2>
 
             <div className="grid md:grid-cols-3 gap-6">
-
               <input
                 required
                 type="number"
                 name="price"
                 value={formData.price}
                 onChange={handleChange}
-                placeholder="Price ₹"
-                className="bg-black border border-gray-800 rounded-xl p-3"
+                placeholder="Selling Price ₹"
+                className="bg-[#0a0a0a] border border-gray-800 focus:border-emerald-500 rounded-xl p-4 outline-none transition-colors"
               />
 
               <input
@@ -307,8 +294,8 @@ export default function AddProduct() {
                 name="discountPrice"
                 value={formData.discountPrice}
                 onChange={handleChange}
-                placeholder="Discount Price"
-                className="bg-black border border-gray-800 rounded-xl p-3"
+                placeholder="Discount Price (Optional)"
+                className="bg-[#0a0a0a] border border-gray-800 focus:border-emerald-500 rounded-xl p-4 outline-none transition-colors"
               />
 
               <input
@@ -317,17 +304,14 @@ export default function AddProduct() {
                 name="stock"
                 value={formData.stock}
                 onChange={handleChange}
-                placeholder="Stock"
-                className="bg-black border border-gray-800 rounded-xl p-3"
+                placeholder="Total Stock"
+                className="bg-[#0a0a0a] border border-gray-800 focus:border-emerald-500 rounded-xl p-4 outline-none transition-colors"
               />
-
             </div>
           </div>
 
           {/* TAGS */}
-
-          <div className="bg-[#111] p-8 rounded-3xl border border-white/5">
-
+          <div className="bg-[#111] p-8 rounded-3xl border border-white/5 shadow-xl">
             <h2 className="text-lg text-emerald-400 flex items-center gap-2 mb-6">
               <Tag size={18} />
               Search Tags
@@ -337,20 +321,18 @@ export default function AddProduct() {
               name="tags"
               value={formData.tags}
               onChange={handleChange}
-              placeholder="summer, khadi, premium"
-              className="w-full bg-black border border-gray-800 rounded-xl p-3"
+              placeholder="e.g., summer, khadi, handwoven (comma separated)"
+              className="w-full bg-[#0a0a0a] border border-gray-800 focus:border-emerald-500 rounded-xl p-4 outline-none transition-colors"
             />
-
           </div>
 
           {/* SUBMIT */}
-
           <button
             disabled={loading}
             type="submit"
-            className="w-full bg-emerald-600 hover:bg-emerald-500 py-5 rounded-2xl font-bold uppercase tracking-widest flex items-center justify-center gap-3"
+            className="w-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-900/30 py-5 rounded-2xl font-bold uppercase tracking-widest flex items-center justify-center gap-3 transition-all active:scale-95"
           >
-            {loading ? "Publishing..." : (
+            {loading ? "Publishing to Store..." : (
               <>
                 <CheckCircle size={20} />
                 Publish Product
